@@ -1,0 +1,48 @@
+[project]
+name = "gdsc"
+version = "0.1.0"
+description = "GDSC project"
+authors = [{ name = "Your Name", email = "your@email.com" }]
+requires-python = ">=3.12"
+dependencies = [
+	"pandas",
+	"numpy",
+    "strands-agents[mistral]",
+    "python-dotenv",
+    "jupyterlab",
+    "git-remote-codecommit",
+    "tqdm"
+]
+
+[dependency-groups]
+dev = [
+	"pre-commit>=4.2.0", # Linting and other dev requirements managed by pre-commit, with exception of a few below like mypy and pytest
+	"mypy>=1.17.0",
+	"pytest>=8.4.1",
+	"pytest-asyncio>=1.1.0",
+	"pytest-cov>=6.2.1",
+]
+
+[tool.mypy]
+explicit_package_bases = true
+python_version = "3.12"
+strict = true
+pretty = true
+show_error_codes = true
+ignore_missing_imports = true
+exclude = ["venv", ".venv", "alembic"]
+
+[tool.ruff]
+target-version = "py312"
+exclude = ["alembic"]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
